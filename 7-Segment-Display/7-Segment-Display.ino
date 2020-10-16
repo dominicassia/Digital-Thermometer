@@ -23,6 +23,7 @@ int digit_4 = 9;
 char none = "none";
 
 // ----- START on/off segments -----
+
 void a(int i){
   if(i == 0)
     digitalWrite( 8, LOW );
@@ -423,68 +424,51 @@ void initialization(){
   delay(10);
 
   d4(0);
-}
 
-// ----- END initialization -----
-
-
-
-void allLoop() {
+  // All digit end
 
   all(1, none);
 
-  digitalWrite( digit_1, HIGH );
+  d1(1);
   delay(100);
-  digitalWrite( digit_1, LOW );
-  delay(100);
-
-  digitalWrite( digit_2, HIGH );
-  delay(100);
-  digitalWrite( digit_2, LOW );
+  d1(0);
   delay(100);
 
-  digitalWrite( digit_3, HIGH );
+  d2(1);
   delay(100);
-  digitalWrite( digit_3, LOW );
-  delay(100);
-
-  digitalWrite( digit_4, HIGH );
-  delay(100);
-  digitalWrite( digit_4, LOW );
+  d2(0);
   delay(100);
 
-  digitalWrite( digit_1, HIGH );
-  digitalWrite( digit_2, HIGH );
-  digitalWrite( digit_3, HIGH );
-  digitalWrite( digit_4, HIGH );
+  d3(1);
+  delay(100);
+  d3(0);
+  delay(100);
+
+  d4(1);
+  delay(100);
+  d4(0);
+  delay(100);
+
+  all(1, d);
+  delay(100);
+  
+  all(0, d);
+  delay(100);
+
+  delay(100);
+
+  all(1, d);
+  delay(100);
 
   delay(100);
   
-  digitalWrite( digit_1, LOW );
-  digitalWrite( digit_2, LOW );
-  digitalWrite( digit_3, LOW );
-  digitalWrite( digit_4, LOW );
-  
-  delay(100);
-
-  digitalWrite( digit_1, HIGH );
-  digitalWrite( digit_2, HIGH );
-  digitalWrite( digit_3, HIGH );
-  digitalWrite( digit_4, HIGH );
-
-  delay(100);
-  
-  digitalWrite( digit_1, LOW );
-  digitalWrite( digit_2, LOW );
-  digitalWrite( digit_3, LOW );
-  digitalWrite( digit_4, LOW );
-  
+  all(0, d);
   delay(100);
   
   all(0, none);
-  
-  delay(2500);
 }
+
+// ----- END initialization -----
 
 void setup() {
 
@@ -510,9 +494,5 @@ void setup() {
 
 void loop() {
   initialization();
-  delay(10);
-  allLoop();
-  delay(100);
-  all(0, none);
-  all(0, d);
+  delay(5000);
 }
