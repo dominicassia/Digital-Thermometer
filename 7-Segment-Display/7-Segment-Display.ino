@@ -20,7 +20,7 @@ int digit_1 = 12;
 int digit_2 = 11;
 int digit_3 = 10;
 int digit_4 = 9;
-char none = "none";
+char none[5] = "none";
 
 // ----- START on/off segments -----
 
@@ -110,7 +110,7 @@ void d4(int i){
 
 // ------ END on/off segments -----
 
-void all(int i, char data){
+void all(int i, char data[5]){
   if(data=="d"){
     if(i==0){
       d1(0);
@@ -153,37 +153,39 @@ void all(int i, char data){
 
 void initialization(){
 
+  int i = 75;
+
   // A
   d1(1);
 
   a(1);
-  delay(10);
+  delay(i);
   a(0);
-  delay(10);
+  delay(i);
 
   d1(0);
   d2(1);
 
   a(1);
-  delay(10);
+  delay(i);
   a(0);
-  delay(10);
+  delay(i);
 
   d2(0);
   d3(1);
 
   a(1);
-  delay(10);
+  delay(i);
   a(0);
-  delay(10);
+  delay(i);
 
   d3(0);
   d4(1);
   
   a(1);
-  delay(10);
+  delay(i);
   a(0);
-  delay(10);
+  delay(i);
 
   d4(0);
   
@@ -191,33 +193,33 @@ void initialization(){
   d1(1);
  
   b(1);
-  delay(10);
+  delay(i);
   b(0);
-  delay(10);
+  delay(i);
 
   d1(0);
   d2(1);
 
   b(1);
-  delay(10);
+  delay(i);
   b(0);
-  delay(10);
+  delay(i);
 
   d2(0);
   d3(1);
 
   b(1);
-  delay(10);
+  delay(i);
   b(0);
-  delay(10);
+  delay(i);
 
   d3(0);
   d4(1);
   
   b(1);
-  delay(10);
+  delay(i);
   b(0);
-  delay(10);
+  delay(i);
 
   d4(0);
 
@@ -225,33 +227,33 @@ void initialization(){
   d1(1);
  
   c(1);
-  delay(10);
+  delay(i);
   c(0);
-  delay(10);
+  delay(i);
 
   d1(0);
   d2(1);
 
   c(1);
-  delay(10);
+  delay(i);
   c(0);
-  delay(10);
+  delay(i);
 
   d2(0);
   d3(1);
 
   c(1);
-  delay(10);
+  delay(i);
   c(0);
-  delay(10);
+  delay(i);
 
   d3(0);
   d4(1);
   
   c(1);
-  delay(10);
+  delay(i);
   c(0);
-  delay(10);
+  delay(i);
 
   d4(0);
 
@@ -259,33 +261,33 @@ void initialization(){
   d1(1);
  
   d(1);
-  delay(10);
+  delay(i);
   d(0);
-  delay(10);
+  delay(i);
 
   d1(0);
   d2(1);
   
   d(1);
-  delay(10);
+  delay(i);
   d(0);
-  delay(10);
+  delay(i);
 
   d2(0);
   d3(1);
 
   d(1);
-  delay(10);
+  delay(i);
   d(0);
-  delay(10);
+  delay(i);
 
   d3(0);
   d4(1);
   
   d(1);
-  delay(10);
+  delay(i);
   d(0);
-  delay(10);
+  delay(i);
 
   d4(0);
 
@@ -293,33 +295,33 @@ void initialization(){
   d1(1);
  
   e(1);
-  delay(10);
+  delay(i);
   e(0);
-  delay(10);
+  delay(i);
 
   d1(0);
   d2(1);
   
   e(1);
-  delay(10);
+  delay(i);
   e(0);
-  delay(10);
+  delay(i);
 
   d2(0);
   d3(1);
 
   e(1);
-  delay(10);
+  delay(i);
   e(0);
-  delay(10);
+  delay(i);
 
   d3(0);
   d4(1);
   
   e(1);
-  delay(10);
+  delay(i);
   e(0);
-  delay(10);
+  delay(i);
 
   d4(0);
 
@@ -327,33 +329,33 @@ void initialization(){
   d1(1);
  
   f(1);
-  delay(10);
+  delay(i);
   f(0);
-  delay(10);
+  delay(i);
 
   d1(0);
   d2(1);
   
   f(1);
-  delay(10);
+  delay(i);
   f(0);
-  delay(10);
+  delay(i);
 
   d2(0);
   d3(1);
 
   f(1);
-  delay(10);
+  delay(i);
   f(0);
-  delay(10);
+  delay(i);
 
   d3(0);
   d4(1);
   
   f(1);
-  delay(10);
+  delay(i);
   f(0);
-  delay(10);
+  delay(i);
 
   d4(0);
 
@@ -361,33 +363,33 @@ void initialization(){
   d1(1);
  
   g(1);
-  delay(10);
+  delay(i);
   g(0);
-  delay(10);
+  delay(i);
 
   d1(0);
   d2(1);
   
   g(1);
-  delay(10);
+  delay(i);
   g(0);
-  delay(10);
+  delay(i);
   
   d2(0);
   d3(1);
 
   g(1);
-  delay(10);
+  delay(i);
   g(0);
-  delay(10);
+  delay(i);
 
   d3(0);
   d4(1);
   
   g(1);
-  delay(10);
+  delay(i);
   g(0);
-  delay(10);
+  delay(i);
 
   d4(0);
 
@@ -395,33 +397,33 @@ void initialization(){
   d1(1);
  
   dp(1);
-  delay(10);
+  delay(i);
   dp(0);
-  delay(10);
+  delay(i);
 
   d1(0);
   d2(1);
   
   dp(1);
-  delay(10);
+  delay(i);
   dp(0);
-  delay(10);
+  delay(i);
   
   d2(0);
   d3(1);
 
   dp(1);
-  delay(10);
+  delay(i);
   dp(0);
-  delay(10);
+  delay(i);
 
   d3(0);
   d4(1);
   
   dp(1);
-  delay(10);
+  delay(i);
   dp(0);
-  delay(10);
+  delay(i);
 
   d4(0);
 
@@ -430,45 +432,107 @@ void initialization(){
   all(1, none);
 
   d1(1);
-  delay(100);
+  delay(i);
   d1(0);
-  delay(100);
+  delay(i);
 
   d2(1);
-  delay(100);
+  delay(i);
   d2(0);
-  delay(100);
+  delay(i);
 
   d3(1);
-  delay(100);
+  delay(i);
   d3(0);
-  delay(100);
+  delay(i);
 
   d4(1);
-  delay(100);
+  delay(i);
   d4(0);
-  delay(100);
+  delay(i);
 
-  all(1, d);
-  delay(100);
+  all(1, "d");
+  delay(i);
   
-  all(0, d);
-  delay(100);
+  all(0, "d");
+  delay(i);
 
-  delay(100);
-
-  all(1, d);
-  delay(100);
-
-  delay(100);
+  all(1, "d");
+  delay(i);
   
-  all(0, d);
-  delay(100);
+  all(0, "d");
+  delay(i);
   
   all(0, none);
 }
 
 // ----- END initialization -----
+
+void snake(){
+  int i = 100;
+
+  // Trun on the first digit
+  d1(1);
+
+  // Blink the first dp three times
+  dp(1);
+  delay(i);
+  dp(0);
+  delay(i);
+
+  dp(1);
+  delay(i);
+  dp(0);
+  delay(i);
+
+  dp(1);
+  delay(i);
+  dp(0);
+  delay(i);
+  
+  // Turn off the first digit, and the second digit on
+  d1(0);
+  d2(1);
+
+  d(1);
+  delay(i);
+  d(0);
+  delay(i);
+
+  // Turn off the second digit, and the third digit on
+  d2(0);
+  d3(1);
+
+  d(1);
+  delay(i);
+  d(0);
+  delay(i);
+
+  // Turn off the third digit, and the fourth digit on: D, C, B, A
+  d3(0);
+  d4(1);
+
+  d(1);
+  delay(i);
+  d(0);
+  delay(i);
+
+  c(1);
+  delay(i);
+  c(0);
+  delay(i);
+
+  b(1);
+  delay(i);
+  b(0);
+  delay(i);
+
+  a(1);
+  delay(i);
+  a(0);
+  delay(i);
+
+}
 
 void setup() {
 
