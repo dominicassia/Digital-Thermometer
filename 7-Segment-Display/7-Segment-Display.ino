@@ -16,68 +16,83 @@
   A0 --> E
 */
 
-int digit_1 = 7;
-int digit_2 = 4;
-int digit_3 = 3;
-int digit_4 = A7;
+// Digits
+int digit_1 = A3;
+int digit_2 = A0;
+int digit_3 = 15;
+int digit_4 = 7;
+
+// Segments
+int a = A2;
+int b = 14;
+int c = 5;
+int d = 3;
+int e = 2;
+int f = A1;
+int g = 6;
+int dp = 4;
+
+// Temp sensor
+int input = 16;
+
 char none[5] = "none";
 
 // ----- START on/off segments -----
 
 void a(int i){
   if(i == 0)
-    digitalWrite( 6, LOW );
+    digitalWrite( a, LOW );
   else
-    digitalWrite( 6, HIGH );
+    digitalWrite( a, HIGH );
 }
 
 void b(int i){
   if(i == 0)
-    digitalWrite( 2, LOW );
+    digitalWrite( b, LOW );
   else
-    digitalWrite( 2, HIGH );
+    digitalWrite( b, HIGH );
 }
 
 void c(int i){
   if(i == 0)
-    analogWrite( A5, 0 );
+    digitalWrite( c, LOW );
   else
-    analogWrite( A5, 255 );
+    digitalWrite( c, HIGH );
 }
 
 void d(int i){
   if(i == 0)
-    analogWrite( A3, 0 );
+    digitalWrite( d, LOW );
   else
-    analogWrite( A3, 255 );
+    digitalWrite( d, HIGH );
 }
 
 void e(int i){
   if(i == 0)
-    analogWrite( A2, 0 );
+    digitalWrite( e, LOW );
   else
-    analogWrite( A2, 255 );
+    digitalWrite( e, HIGH );
 }
 
 void f(int i){
   if(i == 0)
-    digitalWrite( 5, LOW );
+    digitalWrite( f, LOW );
   else
-    digitalWrite( 5, HIGH );
+    digitalWrite( f, HIGH );
 }
 
 void g(int i){
   if(i == 0)
-    analogWrite( A6, 0 );
+    digitalWrite( g, LOW );
   else
-    analogWrite( A6, 255 );
+    digitalWrite( g, HIGH );
 }
 
 void dp(int i){
   if(i == 0)
-    analogWrite( A4, 0 );
+    digitalWrite( dp, LOW );
   else
-    analogWrite( A4, 255 );
+    digitalWrite( dp, HIGH );
 }
 
 void d1(int i){
@@ -103,9 +118,9 @@ void d3(int i){
 
 void d4(int i){
   if(i == 0)
-    analogWrite( digit_4, 0 );
+    digitalWrite( digit_4, LOW );
   else
-    analogWrite( digit_4, 255 );
+    digitalWrite( digit_4, HIGH );
 }
 
 // ------ END on/off segments -----
@@ -721,21 +736,21 @@ void snake(){
 void setup() {
 
   // Assign Pins
-  pinMode( 13, INPUT );
+    pinMode(input, INPUT);  // Temp sensor
 
-  pinMode( 2, OUTPUT );
-  pinMode( 3, OUTPUT );
-  pinMode( 4, OUTPUT );
-  pinMode( 5, OUTPUT );
-  pinMode( 6, OUTPUT );
-  pinMode( 7, OUTPUT );
+    pinMode(d1, OUTPUT);    // Cathode
+    pinMode(d2, OUTPUT);    // Cathode
+    pinMode(d3, OUTPUT);    // Cathode
+    pinMode(d4, OUTPUT);    // Cathode
 
-  pinMode( A2, OUTPUT );
-  pinMode( A3, OUTPUT );
-  pinMode( A4, OUTPUT );
-  pinMode( A5, OUTPUT );
-  pinMode( A6, OUTPUT );
-  pinMode( A7, OUTPUT );
+    pinMode(a, OUTPUT);
+    pinMode(b, OUTPUT);
+    pinMode(c, OUTPUT);
+    pinMode(d, OUTPUT);
+    pinMode(e, OUTPUT);
+    pinMode(f, OUTPUT);
+    pinMode(g, OUTPUT);
+    pinMode(dp, OUTPUT);
 }
 
 void loop() {
