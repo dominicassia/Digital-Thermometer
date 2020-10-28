@@ -1,747 +1,355 @@
 /* 
-  Cathodes
-  Digit 1 --> Digit 4
-  D9, D10, D11, D12
+ *****SEGMENT*****
+ 
+        AAA
+       F   B
+       F   B
+        GGG
+       E   C
+       E   C
+        DDD  DP
+        
+  *****DISPLAY*****
   
-  Anodes
-  D0, D1, D2, D4, D5, D6, D7, D8
+  --------------------------
+ |     D1 A  F  D2 D3 B     |
+ |                          |
+ |     E  D  DP C  G  D4    |
+  --------------------------
 
-  2  --> G
-  3  --> C
-  4  --> DP
-  5  --> D
-  6  --> B
-  7  --> F
-  8  --> A
-  A0 --> E
+  *****MICRO PRO*****
+
+  -----------------------------
+ |     A3 A2 A1 A0 15 14       |
+ |                             |
+ |     2  3  4  5  6  7        |
+  -----------------------------
+
+  *****PINS*****
+  
+  MICRO PRO :   DISPLAY
+  
+         [ TOP ]
+         
+      A3    :    D1
+      A2    :    A
+      A1    :    F
+      A0    :    D2
+      15    :    D3
+      14    :    B
+      
+        [ BOTTOM ]
+        
+      02    :    E
+      03    :    D
+      04    :    DP
+      05    :    C
+      06    :    G
+      07    :    D4
+
+
+  Note: Common Cathode Display    
 */
 
 // Digits
-int digit_1 = A3;
-int digit_2 = A0;
-int digit_3 = 15;
-int digit_4 = 7;
+#define d1 A3
+#define d2 A0
+#define d3 15
+#define d4 7
 
 // Segments
-int a = A2;
-int b = 14;
-int c = 5;
-int d = 3;
-int e = 2;
-int f = A1;
-int g = 6;
-int dp = 4;
+#define a A2
+#define b 14
+#define c 5
+#define d 3
+#define e 2
+#define f A1
+#define g 6
+#define dp 4
 
 // Temp sensor
-int input = 16;
+#define input 16
 
-char none[5] = "none";
 
-// ----- START on/off segments -----
-
-void a(int i){
-  if(i == 0)
-    digitalWrite( a, LOW );
-  else
-    digitalWrite( a, HIGH );
+void pinOn(char pin){
+  digitalWrite(pin, HIGH);
 }
 
-void b(int i){
-  if(i == 0)
-    digitalWrite( b, LOW );
-  else
-    digitalWrite( b, HIGH );
+void pinOff(char pin){
+  digitalWrite(pin, LOW);
 }
 
-void c(int i){
-  if(i == 0)
-    digitalWrite( c, LOW );
-  else
-    digitalWrite( c, HIGH );
+void blinkSeg(char pin, int i){
+    
+    pinOn(pin);
+    delay(i);
+    
+    pinOff(pin);
+    delay(i); 
 }
 
-void d(int i){
-  if(i == 0)
-    digitalWrite( d, LOW );
-  else
-    digitalWrite( d, HIGH );
+void checkDigit(char digit, int i){
+
+    pinOn(digit);
+
+    blinkSeg(a, i);
+    blinkSeg(b, i);
+    blinkSeg(c, i);
+    blinkSeg(d, i);
+    blinkSeg(e, i);
+    blinkSeg(f, i);
+    blinkSeg(g, i);
+    blinkSeg(dp, i);
+
+    pinOff(digit);
 }
 
-void e(int i){
-  if(i == 0)
-    digitalWrite( e, LOW );
-  else
-    digitalWrite( e, HIGH );
+void allSegCheck(int i){
+  // i is the delay between each blink 50-100ms recommended
+
+  checkDigit(d1, i);
+  checkDigit(d2, i);
+  checkDigit(d3, i);
+  checkDigit(d4, i);
+  
 }
 
-void f(int i){
-  if(i == 0)
-    digitalWrite( f, LOW );
-  else
-    digitalWrite( f, HIGH );
+void allOn(){
+
+  pinOn(d1);
+  pinOn(d2);
+  pinOn(d3);
+  pinOn(d4);
+  
+  pinOn(a);
+  pinOn(b);
+  pinOn(c);
+  pinOn(d);
+  pinOn(e);
+  pinOn(f);
+  pinOn(g);
+  pinOn(dp);
+  
 }
 
-void g(int i){
-  if(i == 0)
-    digitalWrite( g, LOW );
-  else
-    digitalWrite( g, HIGH );
+void allOff(){
+
+  pinOff(d1);
+  pinOff(d2);
+  pinOff(d3);
+  pinOff(d4);
+  
+  pinOff(a);
+  pinOff(b);
+  pinOff(c);
+  pinOff(d);
+  pinOff(e);
+  pinOff(f);
+  pinOff(g);
+  pinOff(dp);
+  
 }
 
-void dp(int i){
-  if(i == 0)
-    digitalWrite( dp, LOW );
-  else
-    digitalWrite( dp, HIGH );
-}
+void flashAll(int n, int i){
+  // n: number of times, i: delay
 
-void d1(int i){
-  if(i == 0)
-    digitalWrite( digit_1, LOW );
-  else
-    digitalWrite( digit_1, HIGH );
-}
+  int count = 0;
+  
+  while(count != n){
+    allOn();
 
-void d2(int i){
-  if(i == 0)
-    digitalWrite( digit_2, LOW );
-  else
-    digitalWrite( digit_2, HIGH );
-}
+    delay(i);
+  
+    allOff();
+  
+    delay(i);
 
-void d3(int i){
-  if(i == 0)
-    digitalWrite( digit_3, LOW );
-  else
-    digitalWrite( digit_3, HIGH );
-}
-
-void d4(int i){
-  if(i == 0)
-    digitalWrite( digit_4, LOW );
-  else
-    digitalWrite( digit_4, HIGH );
-}
-
-// ------ END on/off segments -----
-
-void all(int i, char data[5]){
-  if(data=="d"){
-    if(i==0){
-      d1(0);
-      d2(0);
-      d3(0);
-      d4(0);
-    }
-    else{
-      d1(1);
-      d2(1);
-      d3(1);
-      d4(1);
-    }
+    count = count + 1;
   }
-  else{
-    if(i==0){
-      a(0);
-      b(0);
-      c(0);
-      d(0);
-      e(0);
-      f(0);
-      g(0);
-      dp(0);
+
+}
+
+void numOn(int n){
+  switch(n){
+    case 0:
+      pinOn(a);
+      pinOn(b);
+      pinOn(c);
+      pinOn(d);
+      pinOn(e);
+      pinOn(f);
+      break;
+    case 1:
+      pinOn(b);
+      pinOn(c);
+      break;
+    case 2:
+      pinOn(a);
+      pinOn(b);
+      pinOn(g);
+      pinOn(e);
+      pinOn(d);
+      break;
+    case 3:
+      pinOn(a);
+      pinOn(b);
+      pinOn(g);
+      pinOn(c);
+      pinOn(d);
+      break;
+    case 4:
+      pinOn(b);
+      pinOn(c);
+      pinOn(g);
+      pinOn(f);
+      break;
+    case 5:
+      pinOn(a);
+      pinOn(f);
+      pinOn(g);
+      pinOn(c);
+      pinOn(d);
+      break;
+    case 6:
+      pinOn(a);
+      pinOn(f);
+      pinOn(g);
+      pinOn(c);
+      pinOn(e);
+      pinOn(d);
+      break;
+    case 7:
+      pinOn(a);
+      pinOn(b);
+      pinOn(c);
+      break;
+    case 8:
+      pinOn(a);
+      pinOn(b);
+      pinOn(c);
+      pinOn(d);
+      pinOn(e);
+      pinOn(f);
+      pinOn(g);
+      break;
+    case 9:
+      pinOn(a);
+      pinOn(b);
+      pinOn(c);
+      pinOn(f);
+      pinOn(g);
+      break;     
+    default:
+      pinOn(g);
+      break;
+  }
+  
+}
+
+void numOff(int n){
+  switch(n){
+    case 0:
+      pinOff(a);
+      pinOff(b);
+      pinOff(c);
+      pinOff(d);
+      pinOff(e);
+      pinOff(f);
+      break;
+    case 1:
+      pinOff(b);
+      pinOff(c);
+      break;
+    case 2:
+      pinOff(a);
+      pinOff(b);
+      pinOff(g);
+      pinOff(e);
+      pinOff(d);
+      break;
+    case 3:
+      pinOff(a);
+      pinOff(b);
+      pinOff(g);
+      pinOff(c);
+      pinOff(d);
+      break;
+    case 4:
+      pinOff(b);
+      pinOff(c);
+      pinOff(g);
+      pinOff(f);
+      break;
+    case 5:
+      pinOff(a);
+      pinOff(f);
+      pinOff(g);
+      pinOff(c);
+      pinOff(d);
+      break;
+    case 6:
+      pinOff(a);
+      pinOff(f);
+      pinOff(g);
+      pinOff(c);
+      pinOff(e);
+      pinOff(d);
+      break;
+    case 7:
+      pinOff(a);
+      pinOff(b);
+      pinOff(c);
+      break;
+    case 8:
+      pinOff(a);
+      pinOff(b);
+      pinOff(c);
+      pinOff(d);
+      pinOff(e);
+      pinOff(f);
+      pinOff(g);
+      break;
+    case 9:
+      pinOff(a);
+      pinOff(b);
+      pinOff(c);
+      pinOff(f);
+      pinOff(g);
+      break;  
+    default:
+      pinOn(g);
+      break;   
+  }
+}
+
+void count(char digit, int i){
+    // digit: the digit to display on, i: amount of time number is displayed
+  
+    pinOn(digit);
+  
+    int count = 0;
+    while(count != 10){
+      
+      numOn(count);
+      delay(i);
+      numOff(count);
+      
+      count = count + 1;
     }
-    else{
-      a(1);
-      b(1);
-      c(1);
-      d(1);
-      e(1);
-      f(1);
-      g(1);
-      dp(1);
-    } 
-  }
-}
 
-// ----- END all -----
-
-void disp_0(){
-  a(1);
-  b(1);
-  c(1);
-  d(1);
-  e(1);
-  f(1);
-}
-void disp_1(){
-  b(1);
-  c(1);
-}
-void disp_2(){
-  a(1);
-  b(1);
-  g(1);
-  e(1);
-  d(1);
-}
-void disp_3(){
-  a(1);
-  b(1);
-  g(1);
-  c(1);
-  d(1);
-}
-void disp_4(){
-  b(1);
-  c(1);
-  g(1);
-  f(1);
-}
-void disp_5(){
-  a(1);
-  f(1);
-  g(1);
-  c(1);
-  d(1);
-}
-void disp_6(){
-  a(1);
-  f(1);
-  e(1);
-  g(1);
-  c(1);
-  d(1);
-}
-void disp_7(){
-  a(1);
-  b(1);
-  c(1);
-}
-void disp_8(){
-  a(1);
-  b(1);
-  c(1);
-  d(1);
-  e(1);
-  f(1);
-  g(1);
-}
-void disp_9(){
-  a(1);
-  b(1);
-  c(1);
-  f(1);
-  g(1);
-}
-void disp_f(){
-  a(1);
-  f(1);
-  g(1);
-  e(1);
-}
-
-// ----- END display chars -----
-
-void allNumbers(int i){
-  
-  disp_0();
-  delay(i);
-  all(0, none);
-
-  delay(i);
-
-  disp_1();
-  delay(i);
-  all(0, none);
-
-  delay(i);
-
-  disp_2();
-  delay(i);
-  all(0, none);
-
-  delay(i);
-
-  disp_3();
-  delay(i);
-  all(0, none);
-
-  delay(i);
-
-  disp_4();
-  delay(i);
-  all(0, none);
-
-  delay(i);
-
-  disp_5();
-  delay(i);
-  all(0, none);
-
-  delay(i);
-
-  disp_6();
-  delay(i);
-  all(0, none);
-
-  delay(i);
-
-  disp_7();
-  delay(i);
-  all(0, none);
-
-  delay(i);
-
-  disp_8();
-  delay(i);
-  all(0, none);
-
-  delay(i);
-
-  disp_9();
-  delay(i);
-  all(0, none);
-
-  delay(i);
-
-  disp_f();
-  delay(i);
-  all(0, none);
-
-  delay(i);
-}
-// ----- END all Numbers -----
-
-void displayValue(float value){
-  
-  // Convert float to string
-  String i = String(value);
-
-  for (int x=0;x<=3;x++){
-    Serial.print(i[x]);
-    Serial.print("\n");  
-  }
- Serial.print(i[2]);
- if(i[2] == "\."){
-  Serial.print("hey");
- }
-}
-
-void initialization(){
-
-  int i = 75;
-
-  // A
-  d1(1);
-
-  a(1);
-  delay(i);
-  a(0);
-  delay(i);
-
-  d1(0);
-  d2(1);
-
-  a(1);
-  delay(i);
-  a(0);
-  delay(i);
-
-  d2(0);
-  d3(1);
-
-  a(1);
-  delay(i);
-  a(0);
-  delay(i);
-
-  d3(0);
-  d4(1);
-  
-  a(1);
-  delay(i);
-  a(0);
-  delay(i);
-
-  d4(0);
-  
- // B
-  d1(1);
- 
-  b(1);
-  delay(i);
-  b(0);
-  delay(i);
-
-  d1(0);
-  d2(1);
-
-  b(1);
-  delay(i);
-  b(0);
-  delay(i);
-
-  d2(0);
-  d3(1);
-
-  b(1);
-  delay(i);
-  b(0);
-  delay(i);
-
-  d3(0);
-  d4(1);
-  
-  b(1);
-  delay(i);
-  b(0);
-  delay(i);
-
-  d4(0);
-
-  // C
-  d1(1);
- 
-  c(1);
-  delay(i);
-  c(0);
-  delay(i);
-
-  d1(0);
-  d2(1);
-
-  c(1);
-  delay(i);
-  c(0);
-  delay(i);
-
-  d2(0);
-  d3(1);
-
-  c(1);
-  delay(i);
-  c(0);
-  delay(i);
-
-  d3(0);
-  d4(1);
-  
-  c(1);
-  delay(i);
-  c(0);
-  delay(i);
-
-  d4(0);
-
-  // D
-  d1(1);
- 
-  d(1);
-  delay(i);
-  d(0);
-  delay(i);
-
-  d1(0);
-  d2(1);
-  
-  d(1);
-  delay(i);
-  d(0);
-  delay(i);
-
-  d2(0);
-  d3(1);
-
-  d(1);
-  delay(i);
-  d(0);
-  delay(i);
-
-  d3(0);
-  d4(1);
-  
-  d(1);
-  delay(i);
-  d(0);
-  delay(i);
-
-  d4(0);
-
-  // E
-  d1(1);
- 
-  e(1);
-  delay(i);
-  e(0);
-  delay(i);
-
-  d1(0);
-  d2(1);
-  
-  e(1);
-  delay(i);
-  e(0);
-  delay(i);
-
-  d2(0);
-  d3(1);
-
-  e(1);
-  delay(i);
-  e(0);
-  delay(i);
-
-  d3(0);
-  d4(1);
-  
-  e(1);
-  delay(i);
-  e(0);
-  delay(i);
-
-  d4(0);
-
-// F
-  d1(1);
- 
-  f(1);
-  delay(i);
-  f(0);
-  delay(i);
-
-  d1(0);
-  d2(1);
-  
-  f(1);
-  delay(i);
-  f(0);
-  delay(i);
-
-  d2(0);
-  d3(1);
-
-  f(1);
-  delay(i);
-  f(0);
-  delay(i);
-
-  d3(0);
-  d4(1);
-  
-  f(1);
-  delay(i);
-  f(0);
-  delay(i);
-
-  d4(0);
-
-  // G
-  d1(1);
- 
-  g(1);
-  delay(i);
-  g(0);
-  delay(i);
-
-  d1(0);
-  d2(1);
-  
-  g(1);
-  delay(i);
-  g(0);
-  delay(i);
-  
-  d2(0);
-  d3(1);
-
-  g(1);
-  delay(i);
-  g(0);
-  delay(i);
-
-  d3(0);
-  d4(1);
-  
-  g(1);
-  delay(i);
-  g(0);
-  delay(i);
-
-  d4(0);
-
-  // DP
-  d1(1);
- 
-  dp(1);
-  delay(i);
-  dp(0);
-  delay(i);
-
-  d1(0);
-  d2(1);
-  
-  dp(1);
-  delay(i);
-  dp(0);
-  delay(i);
-  
-  d2(0);
-  d3(1);
-
-  dp(1);
-  delay(i);
-  dp(0);
-  delay(i);
-
-  d3(0);
-  d4(1);
-  
-  dp(1);
-  delay(i);
-  dp(0);
-  delay(i);
-
-  d4(0);
-
-  // All digit end
-
-  all(1, none);
-
-  d1(1);
-  delay(i);
-  d1(0);
-  delay(i);
-
-  d2(1);
-  delay(i);
-  d2(0);
-  delay(i);
-
-  d3(1);
-  delay(i);
-  d3(0);
-  delay(i);
-
-  d4(1);
-  delay(i);
-  d4(0);
-  delay(i);
-
-  all(1, "d");
-  delay(i);
-  
-  all(0, "d");
-  delay(i);
-
-  all(1, "d");
-  delay(i);
-  
-  all(0, "d");
-  delay(i);
-  
-  all(0, none);
-
-  // Counting
-  
-  d1(1);
-  allNumbers(i);
-  d1(0);
-
-  d2(1);
-  allNumbers(i);
-  d2(0);
-
-  d3(1);
-  allNumbers(i);
-  d3(0);
-
-  d4(1);
-  allNumbers(i);
-  d4(0);
-
-  all(1, "d");
-  allNumbers(i);
-  all(0, "d");
-}
-
-// ----- END initialization -----
-
-void snake(){
-  int i = 100;
-
-  // Trun on the first digit
-  d1(1);
-
-  // Blink the first dp three times
-  dp(1);
-  delay(i);
-  dp(0);
-  delay(i);
-
-  dp(1);
-  delay(i);
-  dp(0);
-  delay(i);
-
-  dp(1);
-  delay(i);
-  dp(0);
-  delay(i);
-  
-  // Turn off the first digit, and the second digit on
-  d1(0);
-  d2(1);
-
-  d(1);
-  delay(i);
-  d(0);
-  delay(i);
-
-  // Turn off the second digit, and the third digit on
-  d2(0);
-  d3(1);
-
-  d(1);
-  delay(i);
-  d(0);
-  delay(i);
-
-  // Turn off the third digit, and the fourth digit on: D, C, B, A
-  d3(0);
-  d4(1);
-
-  d(1);
-  delay(i);
-  d(0);
-  delay(i);
-
-  c(1);
-  delay(i);
-  c(0);
-  delay(i);
-
-  b(1);
-  delay(i);
-  b(0);
-  delay(i);
-
-  a(1);
-  delay(i);
-  a(0);
-  delay(i);
+    pinOff(digit);
 
 }
 
-void setup() {
+void setup(){
 
   // Assign Pins
     pinMode(input, INPUT);  // Temp sensor
 
-    pinMode(d1, OUTPUT);    // Cathode
-    pinMode(d2, OUTPUT);    // Cathode
-    pinMode(d3, OUTPUT);    // Cathode
-    pinMode(d4, OUTPUT);    // Cathode
+    pinMode(d1, OUTPUT);
+    pinMode(d2, OUTPUT);
+    pinMode(d3, OUTPUT);
+    pinMode(d4, OUTPUT);
 
     pinMode(a, OUTPUT);
     pinMode(b, OUTPUT);
@@ -751,16 +359,24 @@ void setup() {
     pinMode(f, OUTPUT);
     pinMode(g, OUTPUT);
     pinMode(dp, OUTPUT);
+    
 }
 
 void loop() {
-//  initialization();
-  all(1,none);
-  all(1,"d");
-  delay(5000);
-  all(0,none);
-  all(0,"d");
-  delay(5000);
 
+  int i = 100;
+
+
+    
+
+  
+
+//  allSegCheck(i);
+//
+//  delay(i);
+//
+//  flashAll(2, i*2);
+//
+//  delay(i);
 
 }
