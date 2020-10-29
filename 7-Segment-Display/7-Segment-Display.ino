@@ -70,7 +70,6 @@
 // Temp sensor
 #define input 16
 
-
 void pinOn(char pin){
   digitalWrite(pin, HIGH);
 }
@@ -169,7 +168,15 @@ void flashAll(int n, int i){
 
 }
 
-void numOn(int n){
+void numOn(int n, String dec = "none"){
+  
+  // Add decimal point
+  if(dec == "dp"){
+    pinOn(dp);
+  }else{
+    pinOff(dp);
+  }
+  
   switch(n){
     case 0:
       pinOn(a);
@@ -246,7 +253,15 @@ void numOn(int n){
   
 }
 
-void numOff(int n){
+void numOff(int n, String dec = "none"){
+  
+  // Add decimal point
+  if(dec == "dp"){
+    pinOff(dp);
+  }else{
+    pinOff(dp);
+  }
+  
   switch(n){
     case 0:
       pinOff(a);
@@ -322,11 +337,50 @@ void numOff(int n){
   }
 }
 
-void count(char digit, int i){
+void cfOn(String deg){
+
+  if(deg == "c"){
+    pinOn(a);
+    pinOn(d);
+    pinOn(e);
+    pinOn(f);
+  }
+  if(deg == "f"){
+    pinOn(a);
+    pinOn(f);
+    pinOn(g);
+    pinOn(e);
+  }
+}
+
+void cfOff(String deg){
+  
+  if(deg == "c"){
+    pinOff(a);
+    pinOff(d);
+    pinOff(e);
+    pinOff(f);
+  }
+  if(deg == "f"){
+    pinOff(a);
+    pinOff(f);
+    pinOff(g);
+    pinOff(e);
+  }
+}
+
+void count(char digit, int i, bool all = false){
     // digit: the digit to display on, i: amount of time number is displayed
-  
-    pinOn(digit);
-  
+
+    if( all == true ){
+      pinOn(d1);
+      pinOn(d2);
+      pinOn(d3);
+      pinOn(d4);
+    }else{
+      pinOn(digit);
+    }
+    
     int count = 0;
     while(count != 10){
       
@@ -337,8 +391,156 @@ void count(char digit, int i){
       count = count + 1;
     }
 
-    pinOff(digit);
+    if( all == true ){
+      pinOff(d1);
+      pinOff(d2);
+      pinOff(d3);
+      pinOff(d4);
+    }else{
+      pinOff(digit);
+    }
+}
 
+int dpIndex(float value){
+  
+  // Convert to a string
+  String v;
+  v = String(value);
+  
+  for(int i = 0; i < 4; i++){
+    
+    // Index up the number
+    String temp = v.substring(i,i+1);
+    
+    // Break if found, i is the index of the dp
+    if(temp == "."){
+      return i;
+    }
+  }
+}
+
+void displayValue(float value, int dpIndex, int i){
+
+  // value: value to display, dpIndex: index of decimal point in value, i: delay between updating values
+
+  // Convert to a string
+  String v;
+  v = String(value);
+
+  switch(dpIndex){
+    case 1:
+   
+      // Indices, digit 1 gets the decimal 0.00F
+      flicker( v.substring(0,1).toInt(), v.substring(2,3).toInt(), v.substring(3,4).toInt(), 1, "f", i);
+      break;
+      
+    case 2:
+    
+      // Indices, digit 2 gets the decimal 00.0F
+      flicker( v.substring(0,1).toInt(), v.substring(1,2).toInt(), v.substring(3,4).toInt(), 2, "f", i);
+      break;
+
+    case 3:
+
+      // No dp bc whole num
+      flicker( v.substring(0,1).toInt(), v.substring(2,3).toInt(), v.substring(3,4).toInt(), 0, "f", i);
+      break;
+  }
+  
+
+
+  // Find the DP
+  // 0.00 or 00.0
+  
+}
+
+void flicker(int v1, int v2, int v3, int decimal, String cf, int t){
+
+  int dTime = 1;
+
+  for( int i = 0; i < t*1000; i++ ){
+    
+    bool dec = false;
+    
+    // Digit 4
+    if( i % 4 == 0 ){
+
+      if( cf == "f" ){
+        pinOn( d4 );
+        cfOn( "f" );
+        delay( dTime );
+        cfOff( "f" );
+        pinOff( d4 ); 
+      }
+
+      if( cf == "c" ){
+        pinOn( d4 );
+        cfOn( "c" );
+        delay( dTime );
+        cfOff( "c" );
+        pinOff( d4 );
+      }
+      
+    }
+
+    // Digit 3
+    if( i % 3 == 0){
+      
+      // Check for dp
+      if( decimal == 3 ){
+        pinOn( d3 );
+        numOn( v3, "dp" );
+        delay( dTime );
+        numOff( v3, "dp" );
+        pinOff( d3 );      
+      }else{
+        pinOn( d3 );
+        numOn( v3 );
+        delay( dTime );
+        numOff( v3 );
+        pinOff( d3 );  
+      }
+    }
+
+    // Digit 2
+    if( i % 2 == 0){
+      
+      // Check for dp
+      if( decimal == 2 ){
+        pinOn( d2 );
+        numOn( v2, "dp" );
+        delay( dTime );
+        numOff( v2, "dp" );
+        pinOff( d2 );
+      }else{
+        pinOn( d2 );
+        numOn( v2 );
+        delay( dTime );
+        numOff( v2 );
+        pinOff( d2 );  
+      }
+    }    
+
+    // Digit 1
+    if( i % 1 == 0){
+      
+      // Check for dp
+      if( decimal == 1 ){
+        pinOn( d1 );
+        numOn( v1, "dp" );
+        delay( dTime );
+        numOff( v1, "dp" );
+        pinOff( d1 );
+      }else{
+        pinOn( d1 );
+        numOn( v1 );
+        delay( dTime );
+        numOff( v1 );
+        pinOff( d1 );  
+      }
+    }
+  }
+  
 }
 
 void setup(){
@@ -359,24 +561,41 @@ void setup(){
     pinMode(f, OUTPUT);
     pinMode(g, OUTPUT);
     pinMode(dp, OUTPUT);
-    
 }
 
 void loop() {
 
   int i = 100;
-
-
-    
-
   
+//   Initialization
+  allSegCheck(i/2);
+  delay(i);
+  count(d1, i*2);
+  delay(i);
+  count(d2, i*2);
+  delay(i);
+  count(d3, i*2);
+  delay(i);
+  count(d4, i*2);
+  delay(i);
+  count(d1, i*2, true);
+  delay(i);
+  flashAll(2, i);
+  delay(i);
 
-//  allSegCheck(i);
-//
-//  delay(i);
-//
-//  flashAll(2, i*2);
-//
-//  delay(i);
+  while (true){
+    float temperature = 75.4;
+  
+    displayValue(temperature, dpIndex(temperature), 3);
+  
+    temperature = 82.3;
+  
+    displayValue(temperature, dpIndex(temperature), 3);
+    
+    temperature = 2.23;
+  
+    displayValue(temperature, dpIndex(temperature), 3);
+  }
+
 
 }
