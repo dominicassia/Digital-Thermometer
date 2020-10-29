@@ -1,4 +1,14 @@
 /* 
+ *****DHT-11*****
+
+     -------
+    | ##### |
+    | ##### |
+    | ##### |
+    |-------|
+    | + S - |
+     -------
+    
  *****SEGMENT*****
  
         AAA
@@ -20,9 +30,9 @@
   *****MICRO PRO*****
 
   -----------------------------
- |     A3 A2 A1 A0 15 14       |
+ | VCC A3 A2 A1 A0 15 14 (16)  |
  |                             |
- |     2  3  4  5  6  7        |
+ | GND 2  3  4  5  6  7        |
   -----------------------------
 
   *****PINS*****
@@ -46,29 +56,44 @@
       05    :    C
       06    :    G
       07    :    D4
+      
+  MICRO PRO :   DHT-11
+
+      16    :   SIGNAL 
+      VCC   :   (+)
+      GND   :   (-)
 
 
   Note: Common Cathode Display    
 */
 
-// Digits
-#define d1 A3
-#define d2 A0
-#define d3 15
-#define d4 7
+// DHT-11
+  #include <DHT.h>
+  #include <Adafruit_Sensor.h>
+  
+  #define DHTPIN 16
+  #define DHTTYPE DHT11
+  
+  DHT dht(DHTPIN, DHTTYPE);
 
-// Segments
-#define a A2
-#define b 14
-#define c 5
-#define d 3
-#define e 2
-#define f A1
-#define g 6
-#define dp 4
+// 7 Segment Display
+  // -- Digits
+  #define d1 A3
+  #define d2 A0
+  #define d3 15
+  #define d4 7
+  
+  // -- Segments
+  #define a A2
+  #define b 14
+  #define c 5
+  #define d 3
+  #define e 2
+  #define f A1
+  #define g 6
+  #define dp 4
 
-// Temp sensor
-#define input 16
+// ** BEGIN Display Functions **
 
 void pinOn(char pin){
   digitalWrite(pin, HIGH);
@@ -446,7 +471,6 @@ void displayValue(float value, int dpIndex, int i){
       flicker( v.substring(0,1).toInt(), v.substring(2,3).toInt(), v.substring(3,4).toInt(), 0, "f", i);
       break;
   }
-  
 }
 
 void flicker(int v1, int v2, int v3, int decimal, String cf, int t){
@@ -541,24 +565,29 @@ void flicker(int v1, int v2, int v3, int decimal, String cf, int t){
 void initialization(int i){
   allSegCheck(i/2);
   delay(i);
-  count(d1, i*2);
+  count(d1, i*1.25);
   delay(i);
-  count(d2, i*2);
+  count(d2, i*1.25);
   delay(i);
-  count(d3, i*2);
+  count(d3, i*1.25);
   delay(i);
-  count(d4, i*2);
+  count(d4, i*1.25);
   delay(i);
-  count(d1, i*2, true);
+  count(d1, i*1.25, true);
   delay(i);
   flashAll(2, i);
   delay(i);
 }
 
+// ** END Display Functions **
+
 void setup(){
 
-  // Assign Pins
-    pinMode(input, INPUT);  // Temp sensor
+  // DHT-11
+    dht.begin();
+
+  // 7 Segment Display - Assign Pins
+    pinMode(DHTPIN, INPUT);  // Temp sensor
 
     pinMode(d1, OUTPUT);
     pinMode(d2, OUTPUT);
@@ -577,23 +606,25 @@ void setup(){
 
 void loop() {
 
+  // 7 Segment Display initalization sequence
   int i = 100;
-  
   initialization(i);
 
-  while (true){
-    float temperature = 75.4;
-  
-    displayValue(temperature, dpIndex(temperature), 3);
-  
-    temperature = 82.3;
-  
-    displayValue(temperature, dpIndex(temperature), 3);
+  while(true){
     
-    temperature = 2.23;
+    // DHT-11 - Read values
+    float h = dht.readHumidity();
+    float v = dht.readTemperature(true);
   
-    displayValue(temperature, dpIndex(temperature), 3);
+    // Not a Number (nan)
+    if ( isnan(h) || isnan(v) ) {
+      Serial.print("No Data.\n");
+      delay(10000);
+      return;
+    }
+
+    // -5 to adjust for difference
+    displayValue(v-5, dpIndex(v-5), 4);
+    
   }
-
-
 }

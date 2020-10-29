@@ -5,10 +5,6 @@
 #define DHTTYPE DHT11
 DHT dht(DHTPIN, DHTTYPE);
 
-// START
-#include "SevSeg.h"
-SevSeg sevseg; //Instantiate a seven segment object
-
 // Initialization
 void setup() {
 
@@ -40,8 +36,5 @@ void loop() {
   Serial.print("Humidity (%): ");
   Serial.print(h);
   Serial.print("\n");
-
-  sevseg.setNumber(v);
-  sevseg.refreshDisplay();
 
 }
