@@ -6,6 +6,8 @@ I was originally inspired by circuit art on instagram to make a device that was 
 
 <img src='https://lh3.googleusercontent.com/BQAatViSDg6Xe5bStlQCquC0nRSNGjbFQP8l6Q-zMrRMkjRLxdxZrqLgaYsEfV7nFklTrxYw9iGJxMiJvHqfNfJANmRVA5L_4kiuv-FShwmIjbCt2AEXxMfw8uTGWvNy62yPS4HqAw=w2400'></img>
 
+<img src='https://lh3.googleusercontent.com/dbB3LsV8lkE1Hzcck7ufakl-gNzr1LAdklztoFNnXku45ENKYvh2_tCMBG2IUIdFQqBb6IQSTMMb44Kv3LdBO5o1Doy54_mhobKJ7E2FYdLb0ESMFNbX2PhbpQiy1g5NPEb-_T1--w=w2400'></img>
+
 ## Materials
 
 - Arduino Pro Micro ( 5v )
@@ -13,6 +15,7 @@ I was originally inspired by circuit art on instagram to make a device that was 
 - DHT-11 Temperature & Humidity Sensor
 - Resistors ( 1 kOhm & 330 Ohm )
 - 0.8mm Brass Rod
+- BC549 NPN Transistors
 
 ## Schematic 
 
@@ -44,3 +47,9 @@ This file was is the driver to the seven segment display. The functions progress
 ##### [Temperature-Display.ino](/Temperature-Display/Temperature-Display.ino)
 
 Temperature-Display is the culmative file which incorperates the functionallity of both prior files. On boot-up, the initialization sequence begins, then the device begins to display temperatures, refreshing about every 5 seconds.
+
+## Media
+
+<img src='https://lh3.googleusercontent.com/WpkUmcQCBiBPZ3Aw7rBWUhWvZ9lXk1xEOTqnkkR7jBo9exBuwDruCXEZAL7IP-r8ffpxJu1mrHFH60F3m0O-soAHLbxunl8WQyn8cmkxc7L40f3FNW2Msgok-7mcXjtpGQrKm-dqsQ=w2400'></img>
+
+<img src='https://lh3.googleusercontent.com/tehtcbZO7UF3cDOmMy7hpLM3JLYLlMYTESGI4jQmw4aEnBMhLghLMY0yJZO0pemJi_s_oXn-RULgwa-IWljLCJtp8b7Dg5YLtHo5letMHSxYuMcsdAKnNr9Xf-NeJEPYLWgCXMVS0g=w2400'></img>
