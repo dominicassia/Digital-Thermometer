@@ -8,9 +8,6 @@ I was originally inspired by circuit art on instagram to make a device that was 
 
 <img src='https://lh3.googleusercontent.com/9-pFid8_y9tSsE70LX2qDZLYeK1wDbxHoQ9CGGZr-8nmcxDlxnjUkd4t-QAotA92OWgaGsT7N30psqHFYeMOxv7QaVUDX5nPj8tk2f5PCSTM687PmqtowWeb4bTAJZ0SkEUoMuPu_Q=w2400'></img>
 
-
-<img src='https://lh3.googleusercontent.com/e_pefJzGizUC87CpGeC3-hrwcYANXIHo08ezuovUoWgzD4sHGOhfeP_zbP3SIwrW2s5-pX2y_hnISqghFxXT2lX9kxDPykIL6hbXc1yraMPEXCQB7hfe77R8-Dz0HZvXDnuj6-nEcg=w2400'></img>
-
 ## Materials
 
 - Arduino Pro Micro ( 5v )
