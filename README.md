@@ -6,7 +6,7 @@ I was originally inspired by circuit art on instagram to make a device that was 
 
 <img src='https://lh3.googleusercontent.com/BQAatViSDg6Xe5bStlQCquC0nRSNGjbFQP8l6Q-zMrRMkjRLxdxZrqLgaYsEfV7nFklTrxYw9iGJxMiJvHqfNfJANmRVA5L_4kiuv-FShwmIjbCt2AEXxMfw8uTGWvNy62yPS4HqAw=w2400'></img>
 
-<img width='80%' src='https://lh3.googleusercontent.com/dbB3LsV8lkE1Hzcck7ufakl-gNzr1LAdklztoFNnXku45ENKYvh2_tCMBG2IUIdFQqBb6IQSTMMb44Kv3LdBO5o1Doy54_mhobKJ7E2FYdLb0ESMFNbX2PhbpQiy1g5NPEb-_T1--w=w2400?raw=true'></img>
+<img src='https://lh3.googleusercontent.com/9-pFid8_y9tSsE70LX2qDZLYeK1wDbxHoQ9CGGZr-8nmcxDlxnjUkd4t-QAotA92OWgaGsT7N30psqHFYeMOxv7QaVUDX5nPj8tk2f5PCSTM687PmqtowWeb4bTAJZ0SkEUoMuPu_Q=w2400'></img>
 
 ## Materials
 
