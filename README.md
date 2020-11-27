@@ -6,7 +6,7 @@ I was originally inspired by circuit art on instagram to make a device that was 
 
 <img src='https://lh3.googleusercontent.com/BQAatViSDg6Xe5bStlQCquC0nRSNGjbFQP8l6Q-zMrRMkjRLxdxZrqLgaYsEfV7nFklTrxYw9iGJxMiJvHqfNfJANmRVA5L_4kiuv-FShwmIjbCt2AEXxMfw8uTGWvNy62yPS4HqAw=w2400'></img>
 
-<img src='https://lh3.googleusercontent.com/dbB3LsV8lkE1Hzcck7ufakl-gNzr1LAdklztoFNnXku45ENKYvh2_tCMBG2IUIdFQqBb6IQSTMMb44Kv3LdBO5o1Doy54_mhobKJ7E2FYdLb0ESMFNbX2PhbpQiy1g5NPEb-_T1--w=w2400'></img>
+<img width='80%' src='https://lh3.googleusercontent.com/dbB3LsV8lkE1Hzcck7ufakl-gNzr1LAdklztoFNnXku45ENKYvh2_tCMBG2IUIdFQqBb6IQSTMMb44Kv3LdBO5o1Doy54_mhobKJ7E2FYdLb0ESMFNbX2PhbpQiy1g5NPEb-_T1--w=w2400?raw=true'></img>
 
 ## Materials
 
@@ -25,7 +25,7 @@ I originally planned on using an Arduino Nano and the CNT-5 sensor, however, I w
 
 
 <div style='display: flex; justify-content: center;'>
-<img width='90%' src='https://lh3.googleusercontent.com/oO8j4DHwO8NHK7utaHeO_7fnyfLCzsE8r5ZpZ72otXHg-707LKqIVLOOZrJhJAEJoJEII4FZI8rWFRER3kh2kUnYmyFqo7-wBhA47ab-MvHwO2JKlFJBtyqLaF22irBDUTJTo9AGTQ=w2400'></img>
+<img width='90%' src='https://lh3.googleusercontent.com/efKw-gRRlDwR_fNYmoWE2xkGwBW0ElB3q5K7ZUV5XWbzsHcE1Mjpg39JTT4o4LQbx3U-u0MUVveq-yeLs6FJZ-DtNJlreP64NuMGQqZJ6pzq9cE0f7Cz_i43Zey_PDmkLX5Va2tr1g=w2400'></img>
 </div>
 
 ##### Arduino Nano & CNT-5
