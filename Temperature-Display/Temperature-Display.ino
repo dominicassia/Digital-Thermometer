@@ -1,6 +1,5 @@
 /* 
  *****DHT-11*****
-
      -------
     | ##### |
     | ##### |
@@ -10,7 +9,6 @@
      -------
     
  *****SEGMENT*****
- 
         AAA
        F   B
        F   B
@@ -20,7 +18,6 @@
         DDD  DP
         
   *****DISPLAY*****
-  
   --------------------------
  |     D1 A  F  D2 D3 B     |
  |                          |
@@ -28,7 +25,6 @@
   --------------------------
 
   *****MICRO PRO*****
-
   -----------------------------
  | VCC A3 A2 A1 A0 15 14 (16)  |
  |                             |
@@ -36,11 +32,9 @@
   -----------------------------
 
   *****PINS*****
-  
   MICRO PRO :   DISPLAY
   
          [ TOP ]
-         
       A3    :    D1
       A2    :    A
       A1    :    F
@@ -49,7 +43,6 @@
       14    :    B
       
         [ BOTTOM ]
-        
       02    :    E
       03    :    D
       04    :    DP
@@ -58,7 +51,6 @@
       07    :    D4
       
   MICRO PRO :   DHT-11
-
       16    :   SIGNAL 
       VCC   :   (+)
       GND   :   (-)
@@ -104,18 +96,14 @@ void pinOff(char pin){
 }
 
 void blinkSeg(char pin, int i){
-    
     pinOn(pin);
     delay(i);
-    
     pinOff(pin);
     delay(i); 
 }
 
 void checkDigit(char digit, int i){
-
     pinOn(digit);
-
     blinkSeg(a, i);
     blinkSeg(b, i);
     blinkSeg(c, i);
@@ -124,22 +112,18 @@ void checkDigit(char digit, int i){
     blinkSeg(f, i);
     blinkSeg(g, i);
     blinkSeg(dp, i);
-
     pinOff(digit);
 }
 
 void allSegCheck(int i){
   // i is the delay between each blink 50-100ms recommended
-
   checkDigit(d1, i);
   checkDigit(d2, i);
   checkDigit(d3, i);
   checkDigit(d4, i);
-  
 }
 
 void allOn(){
-
   pinOn(d1);
   pinOn(d2);
   pinOn(d3);
@@ -157,7 +141,6 @@ void allOn(){
 }
 
 void allOff(){
-
   pinOff(d1);
   pinOff(d2);
   pinOff(d3);
@@ -171,37 +154,27 @@ void allOff(){
   pinOff(f);
   pinOff(g);
   pinOff(dp);
-  
 }
 
 void flashAll(int n, int i){
   // n: number of times, i: delay
-
   int count = 0;
-  
   while(count != n){
     allOn();
-
     delay(i);
-  
     allOff();
-  
     delay(i);
-
     count = count + 1;
   }
-
 }
 
 void numOn(int n, String dec = "none"){
-  
   // Add decimal point
   if(dec == "dp"){
     pinOn(dp);
   }else{
     pinOff(dp);
   }
-  
   switch(n){
     case 0:
       pinOn(a);
@@ -279,7 +252,6 @@ void numOn(int n, String dec = "none"){
 }
 
 void numOff(int n, String dec = "none"){
-  
   // Add decimal point
   if(dec == "dp"){
     pinOff(dp);
@@ -363,7 +335,6 @@ void numOff(int n, String dec = "none"){
 }
 
 void cfOn(String deg){
-
   if(deg == "c"){
     pinOn(a);
     pinOn(d);
@@ -379,7 +350,6 @@ void cfOn(String deg){
 }
 
 void cfOff(String deg){
-  
   if(deg == "c"){
     pinOff(a);
     pinOff(d);
